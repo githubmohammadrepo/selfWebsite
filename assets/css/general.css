@@ -1,0 +1,15 @@
+#default-background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 0.4;
+}
+
+*{
+  opacity: initial;
+}
+
+img[title="programmerIcon"]{
+  width:100px;
+}
