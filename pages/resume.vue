@@ -43,7 +43,7 @@
                         <v-badge
                           :value="hover"
                           color="deep-purple accent-4"
-                          content="12+"
+                          content="پروژه 12"
                           left
                           transition="slide-x-transition"
                           class="mx-auto"
@@ -59,37 +59,57 @@
               <!-- تکنولوژی های برنامه نویسی -->
               <h5 id="h3" class="pb-1 teal--text">تکنولوژی های عمومی برنامه نویسی</h5>
               <hr class="pink" />
-              <v-row justify="center">
+              <v-row justify="center ">
                 <v-col v-for="item in publicTechnology" :key="item.id" lg="3" md="4" sm="6" xs="12">
                   <template>
                     <v-card class="mx-auto" max-width="344">
                       <v-img :src="item.image" class="img-fluid"></v-img>
 
-                      <v-card-title class="h4">پروژه های انجام شده</v-card-title>
 
-                      <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
-                      <v-card-text class="m-0">
+                      <v-card-text class="m-0 pa-0 w-100 purple">
                         <v-list shaped class="pa-0 w-100">
-                          <v-subheader>REPORTS</v-subheader>
-                          <v-list-item-group v-model="item.text" class="p-0">
-                            <v-list-item color="info" class="pa-0">
-                                <v-list-item-icon class="ml-1">
-                                  <v-icon>mdi-webpack</v-icon>
-                                </v-list-item-icon>
-                                <v-list-item-content>
-                                  <v-list-item-title>پروژه های انجام شده</v-list-item-title>
-                                </v-list-item-content>
-                                <v-list-item-icon class="pa-0">
-                                  <v-badge
-                                    color="deep-purple accent-4"
-                                    content="99+"
-                                    inline
-                                    transition="slide-x-transition"
-                                    top
-                                  >
-                              </v-badge>
-                                </v-list-item-icon>
+                          <v-subheader>پروژه های انجام شده</v-subheader>
+                          <v-list-item-group v-model="item.text" class="">
+                            <!-- first list item in here -->
+                            <!-- dialog for firstitme -->
+                            <dialogResume />
+                            <!-- end dialog for firstitme -->
+                            <v-list-item color="info" class="pa-0" @click.prevent="showDialogItem">
+                              <v-list-item-icon class="ml-1">
+                                <v-icon>mdi-webpack</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title>پروژه های تمرینی</v-list-item-title>
+                              </v-list-item-content>
+                              <v-list-item-icon class="pa-0">
+                                <v-badge
+                                  color="deep-purple accent-4"
+                                  content="99+"
+                                  inline
+                                  transition="slide-x-transition"
+                                  top
+                                ></v-badge>
+                              </v-list-item-icon>
                             </v-list-item>
+                            <!-- second list item in here -->
+                            <v-list-item color="info" class="pa-0">
+                              <v-list-item-icon class="ml-1">
+                                <v-icon>mdi-webpack</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title>پروژه های تمرینی</v-list-item-title>
+                              </v-list-item-content>
+                              <v-list-item-icon class="pa-0">
+                                <v-badge
+                                  color="deep-purple accent-4"
+                                  content="99+"
+                                  inline
+                                  transition="slide-x-transition"
+                                  top
+                                ></v-badge>
+                              </v-list-item-icon>
+                            </v-list-item>
+
                           </v-list-item-group>
                         </v-list>
                       </v-card-text>
@@ -107,7 +127,7 @@
                       </v-card-actions>
 
                       <v-expand-transition>
-                        <div v-show="item.show">
+                        <div v-show="item.show" class="p-absolute">
                           <v-divider></v-divider>
 
                           <v-card-text>I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.</v-card-text>
@@ -338,9 +358,17 @@
   </v-card>
 </template>
 <script>
+import dialogResume from '~/components/dialogResume'
 export default {
+  components:{
+    dialogResume,
+  },
   data() {
     return {
+      dialog: false,
+      notifications: false,
+      sound: true,
+      widgets: false,
       tab: null,
       hover: true,
       programingLanguages: [
@@ -540,7 +568,12 @@ export default {
         }
       ]
     }
-  }
+  },
+  methods: {
+    showDialogItem(){
+      this.$store.commit('resume/toggleResumeDialog')
+    }
+  },
 }
 </script>
 
@@ -553,5 +586,10 @@ export default {
 }
 .w-100 {
   width: 100%;
+}
+.p-absolute {
+  position: absolute !important;
+  background-color: rgb(24, 32, 34);
+  z-index: 1;
 }
 </style>

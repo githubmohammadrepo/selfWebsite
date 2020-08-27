@@ -30,15 +30,83 @@
 
           <v-card-text class="text--primary">
             <v-row justify="space-around">
-              <v-icon large color="green darken-2">mdi-vuejs</v-icon>
+              <v-tabs
+                background-color=""
+                center-active
+                dark
+              >
+                <v-tab>
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon large v-bind="attrs" v-on="on" color="green darken-2">mdi-vuejs</v-icon>
+                    </template>
+                    <span>vuejs2.x</span>
+                  </v-tooltip>
+                </v-tab>
 
-              <v-icon large color="blue darken-2">mdi-nuxt</v-icon>
+                <v-tab>
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon large v-bind="attrs" v-on="on" color="blue darken-2">mdi-nuxt</v-icon>
+                    </template>
+                    <span>nuxtjs 2.x</span>
+                  </v-tooltip>
+                </v-tab>
 
-              <v-icon large color="pink darken-5" title="laravel">mdi-laravel</v-icon>
+                <v-tab>
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon large v-bind="attrs" v-on="on" color="pink darken-5" title="laravel">mdi-laravel</v-icon>
+                    </template>
+                    <span>laravel7.x</span>
+                  </v-tooltip>
+                </v-tab>
 
-              <v-icon large color="blue darken-2" title="vuetify">mdi-vuetify</v-icon>
+                <v-tab>
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon large v-bind="attrs" v-on="on" color="blue darken-2" title="vuetify">mdi-vuetify</v-icon>
+                    </template>
+                    <span>vuetify</span>
+                  </v-tooltip>
+                </v-tab>
 
-              <v-icon large color="purple darken-2">mdi-bootstrap</v-icon>
+                <v-tab>
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon large v-bind="attrs" v-on="on" color="purple darken-2">mdi-bootstrap</v-icon>
+                    </template>
+                    <span>bootstrap4</span>
+                  </v-tooltip>
+                </v-tab>
+
+                <v-tab>
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon large v-bind="attrs" v-on="on" color="blue darken-2">mdi-language-typescript</v-icon>
+                    </template>
+                    <span>typescript</span>
+                  </v-tooltip>
+                </v-tab>
+
+                <v-tab>
+                  <v-tooltip top>
+                  <template v-slot:activator="{ on, attrs }">
+                      <v-icon large v-bind="attrs" v-on="on" color="orange darken-2">mdi-language-html5</v-icon>
+                    </template>
+                    <span>html5</span>
+                  </v-tooltip>
+                </v-tab>
+
+                <v-tab>
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon v-bind="attrs" v-on="on" large color="blue accent-2" >mdi-language-css3</v-icon>
+                    </template>
+                    <span>css3</span>
+                  </v-tooltip>
+                </v-tab>
+              </v-tabs>
             </v-row>
 
             <v-list rounded>

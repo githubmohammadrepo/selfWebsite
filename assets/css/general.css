@@ -1,9 +1,12 @@
 #default-background {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
   opacity: 0.4;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
 }
 
 *{
