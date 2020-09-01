@@ -1,3 +1,15 @@
+/* set font byakan for website */
+@font-face {
+  font-family: "yekan";
+  src: url(./../fonts/Yekan/Yekan.eot);
+  src: url(./../fonts/Yekan/Yekan.eot?#iefix) format("embedded-opentype"), url(./../fonts/Yekan/Yekan.woff) format(“woff”), url(./../fonts/Yekan/Yekan.ttf) format(“truetype”), url(./../fonts/Yekan/Yekan.svg#BYekan) format("svg");
+  font-weight: normal;
+  font-style: normal
+}
+*{
+  font-family: "yekan";
+}
+/* end set font for websiete */
 #default-background {
   position: fixed;
   left: 0;
@@ -16,3 +28,6 @@
 img[title="programmerIcon"]{
   width:100px;
 }
+
+[v-cloak] { display:none; }
+
