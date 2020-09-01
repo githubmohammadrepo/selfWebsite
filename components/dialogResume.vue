@@ -1,56 +1,55 @@
  <template>
-  <v-container grid-list-xs v-cloak>
-    <v-row>
-      <v-col cols="12">
-        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-          <v-card class="">
-            <v-img :src="imageHeader" height="194" width="100%">
-              <!-- <v-toolbar dark color="hide" :style="'background: url('+imageHeader+') no-repeat center center;background-size: cover'"> -->
-              <v-toolbar dark color="hide" :style="'background:transparent;box-shadow:none;'">
-                <v-btn icon class="pink" @click="dialog = false">
-                  <v-icon>mdi-close</v-icon>
-                </v-btn>
-              </v-toolbar>
-            </v-img>
+  <v-dialog v-model="dialog" v-cloak fullscreen hide-overlay transition="dialog-bottom-transition">
+    <v-card class>
+      <v-img :src="imageHeader" height="194" width="100%">
+        <!-- <v-toolbar dark color="hide" :style="'background: url('+imageHeader+') no-repeat center center;background-size: cover'"> -->
+        <v-toolbar dark color="hide" :style="'background:transparent;box-shadow:none;'">
+          <v-btn icon class="pink" @click="dialog = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-toolbar>
+      </v-img>
 
-            <!-- <v-toolbar dark color="hide" :style="'background: url('+imageHeader+') no-repeat center center;background-size: cover'"> -->
-            <!-- <v-row dark color="hide" :style="'background:transparent;box-shadow:none;'"> -->
-              <v-col cols="12" justify="center">
-                <h6
-                  class="text-center text-h5 text-center mt-1 py-3 theme--light elevation-2 v-card-text amber--text text-shadow"
-                  v-text="titleHeader"
-                ></h6>
-              </v-col>
-            <!-- </v-row> -->
-
-            <v-card-text>
-              <v-row>
-                <v-col v-for="item in 5" :key="item">
-                  <slot name="projectContentDialog"></slot>
-                </v-col>
-              </v-row>
-            </v-card-text>
-
-            <v-card-actions>
-              <v-btn text color="deep-purple accent-4">Read</v-btn>
-              <v-btn text color="deep-purple accent-4">Bookmark</v-btn>
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>mdi-share-variant</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+      <!-- <v-toolbar dark color="hide" :style="'background: url('+imageHeader+') no-repeat center center;background-size: cover'"> -->
+      <!-- <v-row dark color="hide" :style="'background:transparent;box-shadow:none;'"> -->
+      <v-col cols="12" justify="center">
+        <h6
+          class="text-center text-h5 text-center mt-1 py-3 theme--light elevation-2 v-card-text amber--text text-shadow"
+          v-text="titleHeader"
+        ></h6>
       </v-col>
-    </v-row>
-  </v-container>
+      <!-- </v-row> -->
+
+      <v-card-text>
+        <v-row>
+          <v-col v-for="image in images" :key="image.id">
+            <projectResume
+              :title="image.title"
+              :image="image.url"
+            ></projectResume>
+          </v-col>
+        </v-row>
+      </v-card-text>
+
+      <v-card-actions>
+        <v-btn text color="deep-purple accent-4">Read</v-btn>
+        <v-btn text color="deep-purple accent-4">Bookmark</v-btn>
+        <v-spacer></v-spacer>
+        <v-btn icon>
+          <v-icon>mdi-heart</v-icon>
+        </v-btn>
+        <v-btn icon>
+          <v-icon>mdi-share-variant</v-icon>
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 
 <script>
+import projectResume from '~/components/projectResume'
+
 export default {
   props: {
     imageHeader: {
@@ -60,29 +59,35 @@ export default {
     titleHeader: {
       type: String,
       required: true
+    },
+    identity:{
+      type:String,
+      required:true,
     }
   },
-
+  components: {
+    projectResume
+  },
+  async fetch() {
+    //sent with parameter identity prop for get html infos
+    let images = await this.$store.dispatch('resume/getImages');
+    this.images = images.filter(data => {
+      return images.indexOf(data) <10;
+    })
+    console.log('images',this.images);
+  },
+  fetchOnServer: false,
   data() {
     return {
-      // dialog: false,
+      images:[],
+      dialog: true,
       notifications: true,
       sound: true,
       widgets: true,
-
       item: 1
     }
   },
-  computed: {
-    dialog: {
-      get() {
-        return this.$store.state.resume.practiceDialog
-      },
-      set(value) {
-        this.$store.commit('resume/togglePracticeDialog')
-      }
-    }
-  }
+
 }
 </script>
 

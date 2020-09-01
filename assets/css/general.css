@@ -31,3 +31,9 @@ img[title="programmerIcon"]{
 
 [v-cloak] { display:none; }
 
+
+.fw-bold{
+  font-weight: bold !important;
+}
+
+

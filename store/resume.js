@@ -1,4 +1,5 @@
 export const state = () => ({
+  images: [],
   practiceDialog: false,
   realDialog: false,
 })
@@ -13,10 +14,21 @@ export const mutations = {
 }
 // actions
 export const actions = {
-  add(context) {
-    // go some where
+  getImages(context){
+    return this.$axios.$get('https://jsonplaceholder.typicode.com/photos')
+    .then(res => {
+      context.images=res;
+      console.log(context.images)
+      return res;
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 }
 // getters
 export const getters = {
+  getTenImages(state){
+    return state.images;
+  }
 }
