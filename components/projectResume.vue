@@ -21,7 +21,7 @@
 
       <v-card-text class="pa-0">
         <v-list dense>
-          <v-subheader class="text-subtitle-1 fw-bold">مشخصات پروژه در یک نگاه</v-subheader>
+          <v-subheader class="text-subtitle-1 fw-bold">مشخصات پروژه </v-subheader>
           <hr color="teal" />
           <v-list-item-group color="primary">
             <v-list-item v-for="(item) in projectItems" :key="item.id">

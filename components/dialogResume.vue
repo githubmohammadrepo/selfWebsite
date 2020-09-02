@@ -22,11 +22,14 @@
 
       <v-card-text>
         <v-row>
-          <v-col v-for="image in images" :key="image.id">
-            <projectResume
-              :title="image.title"
-              :image="image.url"
-            ></projectResume>
+          <!-- show spinner when data is coming from server -->
+          <v-col v-if="showSpinner" align="center">
+            <v-progress-circular indeterminate color="primary" size="122" class="mt-5"></v-progress-circular>
+          </v-col>
+          <!-- show all data from server -->
+          <v-col v-else v-for="image in images" :key="image.id">
+            <h2>{{showSpinner}}</h2>
+            <projectResume :title="image.title" :image="image.url"></projectResume>
           </v-col>
         </v-row>
       </v-card-text>
@@ -60,34 +63,72 @@ export default {
       type: String,
       required: true
     },
-    identity:{
-      type:String,
-      required:true,
+    identity: {
+      type: String,
+      required: true
     }
   },
   components: {
     projectResume
   },
   async fetch() {
+    this.start = true
+    this.end = false
     //sent with parameter identity prop for get html infos
-    let images = await this.$store.dispatch('resume/getImages');
-    this.images = images.filter(data => {
-      return images.indexOf(data) <10;
-    })
-    console.log('images',this.images);
+    console.log('start:' + this.start, 'end: ' + this.end)
+
+    let images = await this.$store.dispatch('resume/getImages')
+    console.log(images)
+
+    if (images) {
+      console.log('success success success')
+      //success
+      this.start = false
+      this.end = true
+    } else {
+      this.end = true
+    }
+    console.log('start:' + this.start, 'end: ' + this.end)
+
+    this.images = images
   },
   fetchOnServer: false,
   data() {
     return {
-      images:[],
+      images: [],
       dialog: true,
       notifications: true,
       sound: true,
       widgets: true,
-      item: 1
+      item: 1,
+      start: true,
+      end: false
     }
   },
-
+  computed: {
+    showSpinner() {
+      console.log('normal start: ', this.start)
+      console.log('normal end: ', this.end)
+      // return true;
+      if (this.start == true && this.end == false) {
+        console.log('show dialog ')
+        return true //show spinner
+      } else if (this.start == false && this.end == true) {
+        //close spinner and result is success
+        console.log('close dialog success')
+        return false
+      } else if (this.start == true && this.end == true) {
+        console.log('error  this.start: ', this.start)
+        console.log('error  this.end: ', this.end)
+        console.log('close dialog error')
+        //close spinner and result is error accured when get data from server
+        return false
+      } else {
+        //do some thing else
+        console.log('some thing was wrong')
+      }
+    }
+  }
 }
 </script>
 
