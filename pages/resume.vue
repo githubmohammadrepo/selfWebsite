@@ -84,11 +84,14 @@
                               class="pa-0"
                               @click.prevent="showPracticeProjecctDialog('html')"
                             >
-                              <v-list-item-icon class="ml-1" @click.prevent="showPracticeProjecctDialog('html')">
+                              <v-list-item-icon
+                                class="ml-1"
+                              >
                                 <v-icon>mdi-webpack</v-icon>
                               </v-list-item-icon>
                               <v-list-item-content>
-                                <v-list-item-title @click.prevent="showPracticeProjecctDialog('html')">پروژه های تمرینی</v-list-item-title>
+                                <v-list-item-title
+                                >پروژه های تمرینی</v-list-item-title>
                               </v-list-item-content>
                               <v-list-item-icon class="pa-0">
                                 <v-badge
@@ -367,6 +370,16 @@
         </v-card>
       </v-tab-item>
     </v-tabs-items>
+
+    <!-- show snackbar error or success-->
+    <v-snackbar v-model="snackbarShow" :timeout="5000" color="pink darken-3">
+      {{ snackbarText }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="amber darken-1" text v-bind="attrs" @click="closeSnackbar">Close</v-btn>
+      </template>
+    </v-snackbar>
+    <!-- end show snackbar error or success -->
+
   </v-card>
 </template>
 <script>
@@ -581,7 +594,7 @@ export default {
       identity: 'undefined',
     }
   },
-  computed:{
+  computed: {
     dialog: {
       get() {
         return this.$store.state.resume.practiceDialog
@@ -590,6 +603,18 @@ export default {
         this.$store.commit('resume/togglePracticeDialog')
       }
     },
+    snackbarShow:{
+      get(){
+        return this.$store.state.resume.showStatusSnackbar;
+      },
+      set(value){
+        this.$store.commit('resume/toggleShowSnackbar');
+      }
+    },
+    snackbarText(){
+      console.log('hi from snackabrtext',this.$store.state.resume.snackbarTextStatus)
+      return this.$store.state.resume.snackbarTextStatus;
+    }
   },
   methods: {
     showPracticeProjecctDialog(identity = 'undefined') {
@@ -601,6 +626,10 @@ export default {
 
     showRealProjectDialog() {
       this.$store.commit('resume/toggleRealDialog')
+    },
+    closeSnackbar(){
+      //toggle show snackbar
+      this.$store.commit('resume/toggleShowSnackbar')
     }
   }
 }

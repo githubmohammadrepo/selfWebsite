@@ -28,9 +28,10 @@
           </v-col>
           <!-- show all data from server -->
           <v-col v-else v-for="image in images" :key="image.id">
-            <h2>{{showSpinner}}</h2>
             <projectResume :title="image.title" :image="image.url"></projectResume>
           </v-col>
+
+
         </v-row>
       </v-card-text>
 
@@ -72,12 +73,14 @@ export default {
     projectResume
   },
   async fetch() {
+    // prerequirts
+    this.$store.commit('resume/toggleShowSnackbar',false)
     this.start = true
     this.end = false
     //sent with parameter identity prop for get html infos
     console.log('start:' + this.start, 'end: ' + this.end)
 
-    let images = await this.$store.dispatch('resume/getImages')
+    let images = await this.$store.dispatch('resume/getImages','html')
     console.log(images)
 
     if (images) {
@@ -85,12 +88,15 @@ export default {
       //success
       this.start = false
       this.end = true
+      this.images = images
     } else {
       this.end = true
+      this.$store.commit('resume/togglePracticeDialog')
+      this.$store.commit('resume/toggleShowSnackbar')
+      this.$store.commit('resume/setSnackbarStatusText','دسترسی به اینترنت وجود ندرد')
     }
     console.log('start:' + this.start, 'end: ' + this.end)
 
-    this.images = images
   },
   fetchOnServer: false,
   data() {
