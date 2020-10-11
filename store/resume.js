@@ -4,7 +4,8 @@ export const state = () => ({
   practiceDialog: false,
   realDialog: false,
   showStatusSnackbar:false,
-  snackbarTextStatus:'default text for status snackbar'
+  snackbarTextStatus:'default text for status snackbar',
+  projectDataType:'html'
 })
 // mutations
 export const mutations = {
@@ -32,11 +33,10 @@ export const actions = {
     if(payload == 'html'){
       url = 'https://jsonplaceholder.typicode.com/photos';
     }else if(payload == 'css') {
-      url = 'https://jsonplaceholder.typeicode.com/posts';
+      url = 'https://jsonplaceholder.typicode.com/todos';
     }else{
       // do some thing else
     }
-    alert(payload)
     return this.$axios.$get(url)
       .then(res => {
         context.images = res.filter(data => {

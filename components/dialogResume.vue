@@ -80,7 +80,7 @@ export default {
     //sent with parameter identity prop for get html infos
     console.log('start:' + this.start, 'end: ' + this.end)
 
-    let images = await this.$store.dispatch('resume/getImages','html')
+    let images = await this.$store.dispatch('resume/getImages',this.identity)
     console.log(images)
 
     if (images) {

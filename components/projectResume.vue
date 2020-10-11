@@ -1,6 +1,6 @@
 <template slot="projectContentDialog">
   <v-hover v-slot:default="{ hover }" close-delay="200">
-    <v-card max-width="344" class="mx-auto" :elevation="hover ? 16 : 2">
+      <v-card max-width="344" class="mx-auto" :elevation="hover ? 16 : 2">
       <p class="text-center"></p>
       <v-card-title primary-title class="blue accent-4 text-center py-0">
         <p class="my-0 py-2">{{title}}</p>
