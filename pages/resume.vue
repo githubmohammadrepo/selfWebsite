@@ -362,8 +362,350 @@
           </v-card-text>
         </v-card>
       </v-tab-item>
-    </v-tabs-items>
 
+      <v-tab-item value="tab-2">
+        <v-card flat>
+          <v-card-text>
+            <template>
+              <!-- زبان های برنامه نویسی -->
+              <h5 class="pb-1 teal--text">نوع پروژه های انجام</h5>
+              <hr class="pink darken-1" />
+              <v-row justify="center">
+                <v-col
+                  v-for="item in projectTypeCount"
+                  :key="item.id"
+                  lg="3"
+                  md="4"
+                  sm="6"
+                  xs="12"
+                  align="center"
+                >
+                  <template>
+                    <v-card color="white pt-5">
+                      <v-card-actions>
+                        <v-badge
+                          :value="hover"
+                          color="deep-purple accent-4"
+                          content="پروژه 12"
+                          left
+                          transition="slide-x-transition"
+                          class="mx-auto"
+                        >
+                          <v-icon color="indigo" size="70">{{item.icon}}</v-icon>
+                        </v-badge>
+                      </v-card-actions>
+                    </v-card>
+                  </template>
+                </v-col>
+              </v-row>
+
+              <!-- تکنولوژی های برنامه نویسی -->
+              <h5 class="pb-1 teal--text">تکنولوژی های عمومی برنامه نویسی</h5>
+              <hr class="pink" />
+              <v-row justify="center">
+                <!-- dialog for practiceProject -->
+                <template v-if="dialog">
+                  <dialogResume
+                    imageHeader="data:image/jpeg;base64,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"
+                    titleHeader="پروژه های انجام شده با html5"
+                    :identity="identity"
+                  ></dialogResume>
+                </template>
+                <!-- end dialog for practiceProject -->
+                <v-col v-for="item in publicTechnology" :key="item.id" lg="3" md="4" sm="6" xs="12">
+                  <template>
+                    <v-card class="mx-auto" max-width="344">
+                      <v-img :src="item.image" class="img-fluid"></v-img>
+
+                      <v-card-text class="m-0 pa-0 w-100 purple">
+                        <v-list shaped class="pa-0 w-100">
+                          <v-subheader>پروژه های انجام شده</v-subheader>
+                          <v-list-item-group v-model="item.text" class>
+                            <v-list-item
+                              color="info"
+                              class="pa-0"
+                              @click.prevent="showPracticeProjecctDialog(item.identity)"
+                            >
+                              <v-list-item-icon class="ml-1">
+                                <v-icon>mdi-webpack</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title>پروژه های تمرینی</v-list-item-title>
+                              </v-list-item-content>
+                              <v-list-item-icon class="pa-0">
+                                <v-badge
+                                  color="deep-purple accent-4"
+                                  content="99+"
+                                  inline
+                                  transition="slide-x-transition"
+                                  top
+                                ></v-badge>
+                              </v-list-item-icon>
+                            </v-list-item>
+                            <!-- second list item in here -->
+                            <v-list-item
+                              color="info"
+                              class="pa-0"
+                              @click.prevent="showRealProjectDialog"
+                            >
+                              <v-list-item-icon class="ml-1">
+                                <v-icon>mdi-webpack</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title>پروژه های واقعی</v-list-item-title>
+                              </v-list-item-content>
+                              <v-list-item-icon class="pa-0">
+                                <v-badge
+                                  color="deep-purple accent-4"
+                                  content="99+"
+                                  inline
+                                  transition="slide-x-transition"
+                                  top
+                                ></v-badge>
+                              </v-list-item-icon>
+                            </v-list-item>
+                          </v-list-item-group>
+                        </v-list>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn text>Share</v-btn>
+
+                        <v-btn color="purple" text>Explore</v-btn>
+
+                        <v-spacer></v-spacer>
+
+                        <v-btn icon @click="item.show = !item.show">
+                          <v-icon>{{ item.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                        </v-btn>
+                      </v-card-actions>
+
+                      <v-expand-transition>
+                        <div v-show="item.show" class="p-absolute">
+                          <v-divider></v-divider>
+
+                          <v-card-text>I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.</v-card-text>
+                        </div>
+                      </v-expand-transition>
+                    </v-card>
+                  </template>
+                </v-col>
+              </v-row>
+
+              <!-- تکنولوژی های زبان جاوا اسکریپت -->
+              <h5 class="pb-1 teal--text">تکنولوژی های زبان برنامه نویسی جاوااسکریپت</h5>
+              <hr class="pink" />
+              <v-row justify="center">
+                <v-col
+                  v-for="item in javascriptTechnology"
+                  :key="item.id"
+                  lg="3"
+                  md="4"
+                  sm="6"
+                  xs="12"
+                >
+                  <template>
+                    <v-card class="mx-auto" max-width="344">
+                      <v-img :src="item.image" class="img-fluid"></v-img>
+
+                      <v-card-title class="h4">پروژه های انجام شده</v-card-title>
+
+                      <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
+                      <v-card-text>
+                        <v-list shaped>
+                          <v-subheader>REPORTS</v-subheader>
+                          <v-list-item-group v-model="item.text" color="primary">
+                            <v-list-item>
+                              <v-list-item-icon>
+                                <v-icon>mdi-webpack</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title>پروژه های انجام شده</v-list-item-title>
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list-item-group>
+                        </v-list>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn text>Share</v-btn>
+
+                        <v-btn color="purple" text>Explore</v-btn>
+
+                        <v-spacer></v-spacer>
+
+                        <v-btn icon @click="item.show = !item.show">
+                          <v-icon>{{ item.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                        </v-btn>
+                      </v-card-actions>
+
+                      <v-expand-transition>
+                        <div v-show="item.show">
+                          <v-divider></v-divider>
+
+                          <v-card-text>I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.</v-card-text>
+                        </div>
+                      </v-expand-transition>
+                    </v-card>
+                  </template>
+                </v-col>
+              </v-row>
+
+              <!-- تکنولوژی های زبان  سی اس اس -->
+              <h5 class="pb-1 teal--text">تکنولوژی های مربوط به سی اس اس</h5>
+              <hr class="pink" />
+              <v-row justify="center">
+                <v-col v-for="item in cssTechnology" :key="item.id" lg="3" md="4" sm="6" xs="12">
+                  <template>
+                    <v-card class="mx-auto" max-width="344">
+                      <v-img :src="item.image" class="img-fluid"></v-img>
+
+                      <v-card-title class="h4">پروژه های انجام شده</v-card-title>
+
+                      <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
+                      <v-card-text>
+                        <v-list shaped>
+                          <v-subheader>REPORTS</v-subheader>
+                          <v-list-item-group v-model="item.text" color="primary">
+                            <v-list-item>
+                              <v-list-item-icon>
+                                <v-icon>mdi-webpack</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title>پروژه های انجام شده</v-list-item-title>
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list-item-group>
+                        </v-list>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn text>Share</v-btn>
+
+                        <v-btn color="purple" text>Explore</v-btn>
+
+                        <v-spacer></v-spacer>
+                        <v-btn icon @click="item.show = !item.show">
+                          <v-icon>{{ item.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                        </v-btn>
+                      </v-card-actions>
+                      <v-expand-transition>
+                        <div v-show="item.show">
+                          <v-divider></v-divider>
+                          <v-card-text>I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.</v-card-text>
+                        </div>
+                      </v-expand-transition>
+                    </v-card>
+                  </template>
+                </v-col>
+              </v-row>
+
+              <!-- تکنولوژی های زبان  پی اچ پی -->
+              <h5 class="pb-1 teal--text">تکنولوژی های مربوط به زبان برنامه نویسی پی اچ پی</h5>
+              <hr class="pink" />
+              <v-row justify="center">
+                <v-col v-for="item in phpTechnology" :key="item.id" lg="3" md="4" sm="6" xs="12">
+                  <template>
+                    <v-card class="mx-auto" max-width="344">
+                      <v-img :src="item.image" class="img-fluid"></v-img>
+
+                      <v-card-title class="h4">پروژه های انجام شده</v-card-title>
+
+                      <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
+                      <v-card-text>
+                        <v-list shaped>
+                          <v-subheader>REPORTS</v-subheader>
+                          <v-list-item-group v-model="item.text" color="primary">
+                            <v-list-item>
+                              <v-list-item-icon>
+                                <v-icon>mdi-webpack</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title>پروژه های انجام شده</v-list-item-title>
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list-item-group>
+                        </v-list>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn text>Share</v-btn>
+
+                        <v-btn color="purple" text>Explore</v-btn>
+
+                        <v-spacer></v-spacer>
+
+                        <v-btn icon @click="item.show = !item.show">
+                          <v-icon>{{ item.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                        </v-btn>
+                      </v-card-actions>
+
+                      <v-expand-transition>
+                        <div v-show="item.show">
+                          <v-divider></v-divider>
+
+                          <v-card-text>I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.</v-card-text>
+                        </div>
+                      </v-expand-transition>
+                    </v-card>
+                  </template>
+                </v-col>
+              </v-row>
+              <!-- دیتابیس ها -->
+              <h5 class="pb-1 teal--text">پایگاه داده ها</h5>
+              <hr class="pink" />
+              <v-row justify="center">
+                <v-col v-for="item in databases" :key="item.id" lg="3" md="4" sm="6" xs="12">
+                  <template>
+                    <v-card class="mx-auto" max-width="344">
+                      <v-img :src="item.image" class="img-fluid"></v-img>
+
+                      <v-card-title class="h4">پروژه های انجام شده</v-card-title>
+
+                      <v-card-subtitle>1,000 miles of wonder</v-card-subtitle>
+                      <v-card-text>
+                        <v-list shaped>
+                          <v-subheader>REPORTS</v-subheader>
+                          <v-list-item-group v-model="item.text" color="primary">
+                            <v-list-item>
+                              <v-list-item-icon>
+                                <v-icon>mdi-webpack</v-icon>
+                              </v-list-item-icon>
+                              <v-list-item-content>
+                                <v-list-item-title>پروژه های انجام شده</v-list-item-title>
+                              </v-list-item-content>
+                            </v-list-item>
+                          </v-list-item-group>
+                        </v-list>
+                      </v-card-text>
+
+                      <v-card-actions>
+                        <v-btn text>Share</v-btn>
+
+                        <v-btn color="purple" text>Explore</v-btn>
+
+                        <v-spacer></v-spacer>
+
+                        <v-btn icon @click="item.show = !item.show">
+                          <v-icon>{{ item.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                        </v-btn>
+                      </v-card-actions>
+
+                      <v-expand-transition>
+                        <div v-show="item.show">
+                          <v-divider></v-divider>
+                          <v-card-text>I'm a thing. But, like most politicians, he promised more than he could deliver. You won't have time for sleeping, soldier, not with all the bed making you'll be doing. Then we'll go with that data file! Hey, you add a one and two zeros to that or we walk! You're going to do his laundry? I've got to find a way to escape.</v-card-text>
+                        </div>
+                      </v-expand-transition>
+                    </v-card>
+                  </template>
+                </v-col>
+              </v-row>
+            </template>
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
     <!-- show snackbar error or success-->
     <v-snackbar v-model="snackbarShow" :timeout="5000" color="pink darken-3">
       {{ snackbarText }}
@@ -387,6 +729,26 @@ export default {
       widgets: false,
       tab: null,
       hover: true,
+      
+      projectTypeCount: [
+        {
+          id: Math.random().toString() + Math.random().toString() + 2,
+          show: false,
+          text: '',
+          icon: 'mdi-language-php',
+          image:
+            'data:image/png;base64,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'
+        },
+        {
+          id: Math.random().toString() + Math.random().toString() + 2,
+          show: false,
+          text: '',
+          icon: 'mdi-language-javascript',
+          image:
+            'data:image/png;base64,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'
+        }
+      ],
+      
       programingLanguages: [
         {
           id: Math.random().toString() + Math.random().toString() + 2,
